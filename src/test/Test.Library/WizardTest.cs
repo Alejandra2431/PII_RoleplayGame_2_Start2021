@@ -1,40 +1,36 @@
 using NUnit.Framework;
-using Library;
-using RoleplayGame;
 
 namespace Test.Library
 {
-
-
-    public class ExampleTest
+    public class WizardTests
     {
 
         [Test]
-        public void WizardTest()
+        public void WizardTestReceiveAttack()
         {
-            Wizard brujo = new Wizard("Prueba1", new SpellBook("El libro de los encantamientos."));
-            brujo.EquipItem(new Item("Daga", 32, 0));
-            brujo.EquipItem(new Item("Arma de fuego M-92", 40, 0));
-            brujo.EquipItem(new Item("Botella", 4, 2));
-            brujo.ExchangeItem(brujo.ReturnInventory()[0], brujo.ReturnInventory()[1]);
-                    
-            Assert.IsNotNull(brujo);
-            Assert.IsNotEmpty(brujo.ReturnInventory());
-            Assert.IsNotEmpty(brujo.spellBook.GetSpells());
+            Wizard wizard = new Wizard("Test0");
+            wizard.ReceiveAttack(20);
+            Assert.AreEqual(80, wizard.health);
         }
 
         [Test]
-        public void SpellsTest()
+        public void WizardTestCure()
         {
-            SpellBook book = new SpellBook("El libro de los encantamientos.");
-            Wizard brujo = new Wizard("Prueba1", book);
-            book.AddSpell(new Spell("Bola de fuego", "fuego", 13));
-            book.AddSpell(new Spell("Bola de nieve", "nieve", 16));
-            book.AddSpell(new Spell("Bola de granizo", "granizo", 20));
+            Wizard wizard = new Wizard("Test1");
+            wizard.Cure();
+            Assert.AreEqual(100, wizard.health);
+        }
 
-            Assert.IsNotEmpty(book.GetSpells());
-            Assert.IsNotNull(book.spellsCount);
-        } 
+        [Test]
+        public void WizardTestSpecialObjects()
+        {
+            Wizard wizard = new Wizard("Test2");
+            wizard.Staff = new Staff();
+            wizard.SpellsBook = new SpellsBook();
+
+            Assert.NotNull(wizard.SpellsBook);
+            Assert.NotNull(wizard.Staff);
+        }
     }
 
 
