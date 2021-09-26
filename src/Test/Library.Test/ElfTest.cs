@@ -20,8 +20,8 @@ namespace Test.Library
         {
             Elf elfa = new Elf("Idril");
             Knight knight = new Knight("Wade");
-            elfa.AttackKnight(knight);
-            expectedHealth = 100 - 35;
+            elfa.AttackEnemy(knight);
+            int expectedHealth = 100 - 35;
             Assert.AreEqual(expectedHealth, knight.CurrentHealth());
         }
 
@@ -44,8 +44,8 @@ namespace Test.Library
             Elf elfa = new Elf("Idril");
             Item itemArmor = new Item("Pocion", 15, 0);
             elfa.EquipItem(itemArmor);
-            int expectedAttack = 35;
-            int expectedArmor = 5 + 15;
+            int expectedAttack = 35 + 15;
+            int expectedArmor = 5;
             Assert.IsNotEmpty(elfa.ReturnInventory());
             Assert.AreEqual(expectedAttack, elfa.ReturnAttack());
             Assert.AreEqual(expectedArmor, elfa.ReturnArmor());
@@ -60,8 +60,8 @@ namespace Test.Library
             int expectedAttack = 35 + 15;
             Assert.AreEqual(expectedAttack, elfa.ReturnAttack());
             
-            elfa.UnEquipItem(itemAtaque);
-            expectedAttack = 35 - 15;
+            elfa.UnequipItem(itemAtaque);
+            expectedAttack = 50 - 15;
             Assert.AreEqual(expectedAttack, elfa.ReturnAttack());
             Assert.IsEmpty(elfa.ReturnInventory());
         }

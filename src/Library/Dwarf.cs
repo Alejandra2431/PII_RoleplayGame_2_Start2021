@@ -5,9 +5,9 @@ namespace Library
     /// <summary>
     /// Se crea la clase
     /// </summary>
-    public class Dwarf
+    public class Dwarf : ICharacter
     {
-        private int health;
+        private int health; 
         private int armor { get; set; }
         private int attack { get; set; }
         private string name { get; }
@@ -37,45 +37,16 @@ namespace Library
             this.inventory = new List<Item>();
         }
         /// <summary>
-        /// //Metodo para atacar a los diferentes personajes se le aplica un calculo en el ataque el cual afecta en la vida del personaje atacado
+        /// Método con el que se ataca al enemigo (objeto de tipo ICharacter) que recibe por parámetro.
         /// </summary>
-        /// <param name="characterEnemy"></param>
-        public void AttackEnemy(Wizard characterEnemy)
+        /// <param name="enemyToAtack"></param>
+        public void AttackEnemy(ICharacter characterEnemy)
         {
             Console.WriteLine($"Se atacó a {characterEnemy.ReturnName()}.");
             characterEnemy.RecieveDamage(this.attack);
             Console.WriteLine($"-{(this.attack - (this.attack * characterEnemy.ReturnArmor()))} de vida a {characterEnemy.ReturnName()}");
         }
-        /// <summary>
-        /// //Metodo para atacar a los diferentes personajes se le aplica un calculo en el ataque el cual afecta en la vida del personaje atacado
-        /// </summary>
-        /// <param name="characterEnemy"></param>
-        public void AttackEnemy(Elf characterEnemy)
-        {
-            Console.WriteLine($"Se atacó a {characterEnemy.ReturnName()}.");
-            characterEnemy.RecieveDamage(this.attack);
-            Console.WriteLine($"-{(this.attack - (this.attack * characterEnemy.ReturnArmor()))} de vida a {characterEnemy.ReturnName()}");
-        }
-        /// <summary>
-        /// //Metodo para atacar a los diferentes personajes se le aplica un calculo en el ataque el cual afecta en la vida del personaje atacado
-        /// </summary>
-        /// <param name="characterEnemy"></param>
-        public void AttackEnemy(Knight characterEnemy)
-        {
-            Console.WriteLine($"Se atacó a {characterEnemy.ReturnName()}.");
-            characterEnemy.RecieveDamage(this.attack);
-            Console.WriteLine($"-{(this.attack - (this.attack * characterEnemy.ReturnArmor()))} de vida a {characterEnemy.ReturnName()}");
-        }
-        /// <summary>
-        /// //Metodo para atacar a los diferentes personajes se le aplica un calculo en el ataque el cual afecta en la vida del personaje atacado
-        /// </summary>
-        /// <param name="characterEnemy"></param>
-        public void AttackEnemy(Dwarf characterEnemy)
-        {
-            Console.WriteLine($"Se atacó a {characterEnemy.ReturnName()}.");
-            characterEnemy.RecieveDamage(this.attack);
-            Console.WriteLine($"-{(this.attack - (this.attack * characterEnemy.ReturnArmor()))} de vida a {characterEnemy.ReturnName()}");
-        }
+
         /// <summary>
         /// //Se le suma al ataque el valor del daño que tiene el item.
         /// </summary>
@@ -135,6 +106,10 @@ namespace Library
         public void RecieveDamage(int damage)
         {
             this.health = this.health - damage;
+        }
+        public List<Item> ReturnInventory()
+        {
+            return this.inventory;
         }
     }
 }

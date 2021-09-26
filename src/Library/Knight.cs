@@ -7,7 +7,7 @@ namespace Library
     /// Creacion de la clase Knight, que contiene 3 atributos para sus estadisticas, 1 para el nombre y 1 lista que representa su
     /// inventario.
     /// </summary>
-    public class Knight
+    public class Knight : ICharacter
     {
         private int health;
         private int attack {get; set;}
@@ -40,47 +40,14 @@ namespace Library
         }
 
         /// <summary>
-        /// Metodo para atacar a un enemigo, en este caso un Wizard.
+        /// Método con el que se ataca al enemigo (objeto de tipo ICharacter) que recibe por parámetro.
         /// </summary>
-        /// <param name="wizard">Enemigo a atacar</param>
-        public void AttackEnemy(Wizard wizard)
+        /// <param name="enemyToAtack"></param>
+        public void AttackEnemy(ICharacter wizard)
         {
             Console.WriteLine($"Se ataca a {wizard.ReturnName()}.");
             wizard.RecieveDamage(this.attack);
             Console.WriteLine($"-{this.attack} de vida a {wizard.ReturnName()}");
-        }
-
-        /// <summary>
-        /// Metodo para atacar a un enemigo, en este caso un Elf.
-        /// </summary>
-        /// <param name="elf">Enemigo a atacar</param>
-        public void AttackEnemy(Elf elf)
-        {
-            Console.WriteLine($"Se ataca a {elf.ReturnName()}.");
-            elf.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {elf.ReturnName()}");
-        }
-
-        /// <summary>
-        /// Metodo para atacar a un enemigo, en este caso un Dwarf.
-        /// </summary>
-        /// <param name="dwarf">Enemigo a atacar</param>
-        public void AttackEnemy(Dwarf dwarf)
-        {
-            Console.WriteLine($"Se ataca a {dwarf.ReturnName()}.");
-            dwarf.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {dwarf.ReturnName()}");
-        }
-
-        /// <summary>
-        /// Metodo para atacar a un enemigo, en este caso un Knight.
-        /// </summary>
-        /// <param name="knight">Enemigo a atacar</param>
-        public void AttackEnemy(Knight knight)
-        {
-            Console.WriteLine($"Se ataca a {knight.ReturnName()}.");
-            knight.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {knight.ReturnName()}");
         }
 
         /// <summary>

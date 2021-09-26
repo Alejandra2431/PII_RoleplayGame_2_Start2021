@@ -7,7 +7,7 @@ namespace Library
     /// <summary>
     /// Clase correspondiente al personaje Elfo.
     /// </summary>
-    public class Elf
+    public class Elf : ICharacter
     {
         private string name {get; set;}
         private int health;
@@ -52,43 +52,10 @@ namespace Library
         }
 
         /// <summary>
-        /// Método con el que se ataca al knight que recibe por parámetro.
+        /// Método con el que se ataca al enemigo (objeto de tipo ICharacter) que recibe por parámetro.
         /// </summary>
         /// <param name="enemyToAtack"></param>
-        public void AttackKnight(Knight enemyToAtack)
-        {
-            Console.WriteLine($"Se ataca a {enemyToAtack.ReturnName()}.");
-            enemyToAtack.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {enemyToAtack.ReturnName()}");
-        }
-
-        /// <summary>
-        /// Método con el que se ataca al wizard que se recibe por parámetro. 
-        /// </summary>
-        /// <param name="enemyToAtack"></param>
-        public void AttackWizard(Wizard enemyToAtack)
-        {
-            Console.WriteLine($"Se ataca a {enemyToAtack.ReturnName()}.");
-            enemyToAtack.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {enemyToAtack.ReturnName()}");
-        }
-
-        /// <summary>
-        /// Método con el que se ataca al dwarf que se recibe por parámetro.
-        /// </summary>
-        /// <param name="enemyToAtack"></param>
-        public void AttackDwarf(Dwarf enemyToAtack)
-        {
-            Console.WriteLine($"Se ataca a {enemyToAtack.ReturnName()}.");
-            enemyToAtack.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {enemyToAtack.ReturnName()}");
-        }
-
-        /// <summary>
-        /// Método con el que se ataca al elf que se recibe por parámetro.
-        /// </summary>
-        /// <param name="enemyToAtack"></param>
-        public void AttackElf(Elf enemyToAtack)
+        public void AttackEnemy(ICharacter enemyToAtack)
         {
             Console.WriteLine($"Se ataca a {enemyToAtack.ReturnName()}.");
             enemyToAtack.RecieveDamage(this.attack);

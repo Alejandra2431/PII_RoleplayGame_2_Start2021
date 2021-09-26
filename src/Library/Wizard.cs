@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Library
 {
-    public class Wizard
+    public class Wizard : ICharacter
     {
         private string name { get; set;}
         private int health { get; set; }
@@ -30,29 +30,10 @@ namespace Library
         }
         
         /// <summary>
-        /// El metodo ataca a otro personaje quitandole vida. Existe una sobrecarga para poder admitir el combate entre 
-        /// todos los personajes del juego.
+        /// Método con el que se ataca al enemigo (objeto de tipo ICharacter) que recibe por parámetro.
         /// </summary>
-        /// <param name="characterEnemy"></param>
-        public void AttackEnemy(Wizard characterEnemy)
-        {
-            Console.WriteLine($"Se ataca a {characterEnemy.ReturnName()}.");
-            characterEnemy.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {characterEnemy.ReturnName()}");
-        }
-        public void AttackEnemy(Elf characterEnemy)
-        {
-            Console.WriteLine($"Se ataca a {characterEnemy.ReturnName()}.");
-            characterEnemy.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {characterEnemy.ReturnName()}");
-        }
-        public void AttackEnemy(Knight characterEnemy)
-        {
-            Console.WriteLine($"Se ataca a {characterEnemy.ReturnName()}.");
-            characterEnemy.RecieveDamage(this.attack);
-            Console.WriteLine($"-{this.attack} de vida a {characterEnemy.ReturnName()}");
-        }
-        public void AttackEnemy(Dwarf characterEnemy)
+        /// <param name="enemyToAtack"></param>
+        public void AttackEnemy(ICharacter characterEnemy)
         {
             Console.WriteLine($"Se ataca a {characterEnemy.ReturnName()}.");
             characterEnemy.RecieveDamage(this.attack);

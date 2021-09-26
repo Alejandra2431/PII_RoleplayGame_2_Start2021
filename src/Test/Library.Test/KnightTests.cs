@@ -66,7 +66,7 @@ namespace Test.Library
         public void AttackTest2()
         {
             Knight knight1 = new Knight("Atacante");
-            Wizard wizard = new Wizard("Defensor");
+            Wizard wizard = new Wizard("Defensor", new SpellBook("Libro"));
             int expectedHealth = 25;
 
             knight1.AttackEnemy(wizard);
@@ -78,7 +78,7 @@ namespace Test.Library
         public void RestoreHP()
         {
             Knight knight = new Knight("Defensor");
-            Wizard wizard = new Wizard("Atacante");
+            Wizard wizard = new Wizard("Atacante", new SpellBook("Libro"));
             int expectedHealth = 100;
 
             wizard.AttackEnemy(knight);
