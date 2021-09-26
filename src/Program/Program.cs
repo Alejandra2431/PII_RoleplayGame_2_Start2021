@@ -1,33 +1,72 @@
 ﻿using System;
-using RoleplayGame;
+using System.Collections.Generic;
+using Library;
 
 namespace Program
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            SpellsBook book = new SpellsBook();
-            book.Spells = new Spell[]{ new Spell() };
+            Elf elf1 = new Elf("Elf1");
+            Elf elf2 = new Elf("Elf2");
+            Item item1 = new Item("Fuego", 10, 0);
+            Item item2 = new Item("Escudo", 10, 5);
+            elf1.EquipItem(item1);
+            elf1.EquipItem(item2);
+            
+            while (elf2.CurrentHealth()>0)
+            {
+                elf1.AttackElf(elf2);
+                elf2.AttackElf(elf1);
+            }
 
-            Wizard gandalf = new Wizard("Gandalf");
-            gandalf.Staff = new Staff();
-            gandalf.SpellsBook = book;
+            /*Creacion de darkKnight y de los items sword y armor*/
+            Knight darkKnight = new Knight("Dark Knight");
+            Item sword = new Item("Sword", 15, 0);
+            Item armor = new Item("Armor", 0, 20);
 
-            Dwarf gimli = new Dwarf("Gimli");
-            gimli.Axe = new Axe();
-            gimli.Helmet = new Helmet();
+            /*Equipado de items a darkKnight*/
+            darkKnight.EquipItem(sword);
+            darkKnight.EquipItem(armor);
 
-            Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
-            Console.WriteLine($"Gandalf attacks Gimli with ⚔️ {gandalf.AttackValue}");
+            /*Printeo de stats de darkKnight*/
+            Console.WriteLine($"Stats de: {darkKnight.ReturnName()}: ");
+            Console.WriteLine($"Attack: {darkKnight.ReturnAttack()}");
+            Console.WriteLine($"Armor: {darkKnight.ReturnArmor()}");
+            Console.WriteLine($"Health: {darkKnight.CurrentHealth()}");
 
-            gimli.ReceiveAttack(gandalf.AttackValue);
+            /*Creacion de defensor*/
+            Knight defensor = new Knight("Defensor");
 
-            Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
+            /*Combate entre darkKnight y defensor*/
+            while ((defensor.CurrentHealth() > 0) & (darkKnight.CurrentHealth() > 0))
+            {
+                darkKnight.AttackEnemy(defensor);
+                Console.WriteLine($"Current health of {defensor.ReturnName()}: {defensor.CurrentHealth()}");
+                defensor.AttackEnemy(darkKnight);
+                Console.WriteLine($"Current health of {darkKnight.ReturnName()}: {darkKnight.CurrentHealth()}");
+            }
+            if (defensor.CurrentHealth() <= 0)
+            {
+                Console.WriteLine($"{darkKnight.ReturnName()} killed {defensor.ReturnName()}.");
+            }
+            else
+            {
+                Console.WriteLine($"{defensor.ReturnName()} killed {darkKnight.ReturnName()}.");         
+            }
 
-            gimli.Cure();
+            /*Restauracion de la vida de darkKnight*/
+            darkKnight.RestoreHealth();
+            Console.WriteLine($"{darkKnight.ReturnName()}'s health has been restored.");
 
-            Console.WriteLine($"Gimli has ❤️ {gimli.Health}");
+            SpellBook libro = new SpellBook("Libro de hechizos.");
+            Wizard brujo = new Wizard("Brujo", libro);
+
+            Item daga = new Item("Daga", 10, 40);
+            brujo.EquipItem(daga);
+
+            brujo.AttackEnemy(elf1);
         }
     }
 }
